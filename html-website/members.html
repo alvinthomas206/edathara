@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members Area | Edathara Kudumbayogam</title>
+    <meta name="description" content="Exclusive members area of Edathara Kudumbayogam.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { maroon: '#800000', gold: '#FFD700', darkgreen: '#006400', cream: '#FFFDD0', lightgold: '#FFE55C' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    boxShadow: { 'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f9fafb; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.18); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        main { flex-grow: 1; }
+        
+        /* Protection overlay until auth is resolved */
+        #page-loader {
+            position: fixed; inset: 0; background-color: #faf9f6; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-maroon selection:text-gold">
+
+    <div id="page-loader">
+        <img src="logo.png" alt="Logo" class="h-16 w-auto inline-block object-contain mb-4 animate-pulse">
+        <p class="text-gray-500 font-medium">Verifying access...</p>
+    </div>
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-xl md:text-2xl font-heading font-bold text-maroon tracking-wider flex items-center gap-2 drop-shadow-sm transition-colors" id="nav-brand">
+                        <img src="logo.png" alt="Logo" class="h-10 w-auto inline-block object-contain">
+                        EDATHARA <span class="hidden sm:inline">KUDUMBAYOGAM</span>
+                    </a>
+                </div>
+                <div class="hidden lg:flex space-x-1 items-center">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                    <a href="family-tree.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Family Tree</a>
+                    <a href="events.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Events</a>
+                    <a href="gallery.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Gallery</a>
+                    <a href="announcements.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Announcements</a>
+                    <a href="donations.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Donations</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    <a id="auth-btn-desktop" href="members.html" class="bg-darkgreen text-white hover:bg-green-800 px-5 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-green-900/30 ml-2"><i class="fa-solid fa-user-circle mr-1"></i> Members</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-800 hover:text-maroon focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="index.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Home</a>
+                <a href="about.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">About</a>
+                <a href="family-tree.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Family Tree</a>
+                <a href="events.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Events</a>
+                <a href="gallery.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Gallery</a>
+                <a href="announcements.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Announcements</a>
+                <a href="donations.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Donations</a>
+                <a href="contact.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Contact</a>
+                <a id="auth-btn-mobile" href="members.html" class="mobile-link block px-3 py-3 text-base font-bold text-darkgreen hover:bg-cream rounded-md border-t border-gray-100 mt-2 pt-4"><i class="fa-solid fa-user-circle mr-2"></i> Members Area</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 flex-grow flex flex-col">
+        <div class="bg-maroon text-white pt-16 pb-24 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#FFD700 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 fade-in">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-heading font-bold flex items-center gap-3" id="welcome-message">
+                        <img src="logo.png" alt="Logo" class="h-8 w-auto inline-block object-contain opacity-80">
+                        Welcome, Family Member
+                    </h1>
+                    <p class="text-maroon-200 mt-2 text-gold font-medium" id="user-email">Loading...</p>
+                </div>
+                <button id="logout-btn" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-20 w-full mb-20 flex-grow fade-in" style="transition-delay: 100ms;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover-lift flex flex-col h-full">
+                    <div class="w-12 h-12 bg-maroon/10 text-maroon rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Family Directory</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Access the complete contact details of all registered family members across all branches.</p>
+                    <a href="directory.html" class="text-maroon font-medium text-sm hover:text-gold transition-colors flex items-center gap-1 self-start">
+                        View Directory <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover-lift flex flex-col h-full">
+                    <div class="w-12 h-12 bg-darkgreen/10 text-darkgreen rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Meeting Minutes</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Read the official minutes, resolutions, and financial reports from the annual general body meetings.</p>
+                    <button class="text-darkgreen font-medium text-sm hover:text-gold transition-colors flex items-center gap-1 self-start">
+                        View Documents <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover-lift flex flex-col h-full">
+                    <div class="w-12 h-12 bg-gold/20 text-yellow-600 rounded-lg flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-images"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Private Archives</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex-grow">Access historical documents, old family portraits, and heritage archives restricted to members only.</p>
+                    <button class="text-yellow-600 font-medium text-sm hover:text-maroon transition-colors flex items-center gap-1 self-start">
+                        Access Archives <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white border border-gray-100 shadow-sm rounded-xl p-6 flex flex-col md:flex-row items-center gap-6 relative">
+                <div class="w-24 h-24 rounded-full border-4 border-gray-50 bg-gray-100 flex-shrink-0 overflow-hidden shadow-inner">
+                    <img id="profile-summary-photo" src="https://via.placeholder.com/150" alt="Profile Photo" class="w-full h-full object-cover hidden">
+                    <div id="profile-summary-initial" class="w-full h-full flex items-center justify-center text-3xl font-bold text-gray-400 bg-gray-100"><i class="fa-solid fa-user"></i></div>
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h2 class="text-2xl font-bold text-gray-900" id="profile-summary-name">Loading...</h2>
+                    <p class="text-maroon font-medium text-sm mt-1 flex items-center justify-center md:justify-start gap-1"><i class="fa-solid fa-code-branch"></i> <span id="profile-summary-branch">Loading...</span> Branch</p>
+                    <p class="text-gray-500 text-sm mt-2 flex items-center justify-center md:justify-start gap-1"><i class="fa-solid fa-phone w-4"></i> <span id="profile-summary-phone">...</span></p>
+                </div>
+                <button onclick="document.getElementById('edit-profile-modal').classList.remove('hidden')" class="bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 px-6 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 flex-shrink-0 mt-4 md:mt-0 shadow-sm hover:shadow">
+                    <i class="fa-solid fa-user-pen"></i> Edit Profile
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6">
+        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative z-10 flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/80 rounded-t-2xl">
+                <h3 class="text-lg font-bold text-gray-900"><i class="fa-solid fa-user-pen text-maroon mr-2"></i> Update Your Profile</h3>
+                <button onclick="document.getElementById('edit-profile-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto flex-grow custom-scrollbar">
+                <form id="edit-profile-form" class="space-y-6">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-32 h-32 rounded-full border border-gray-200 bg-gray-50 overflow-hidden relative group cursor-pointer" onclick="document.getElementById('edit-photo').click()">
+                                <img id="edit-photo-preview" src="https://via.placeholder.com/150" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center transition-all">
+                                    <i class="fa-solid fa-camera text-white text-xl"></i>
+                                </div>
+                            </div>
+                            <label class="text-[10px] font-bold text-maroon uppercase tracking-wider cursor-pointer hover:underline">
+                                Change Photo
+                                <input type="file" id="edit-photo" class="hidden" accept="image/*" onchange="if(this.files[0]) { document.getElementById('edit-photo-preview').src = URL.createObjectURL(this.files[0]) }">
+                            </label>
+                        </div>
+                        
+                        <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Full Name *</label>
+                                <input type="text" id="edit-fullname" required class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Phone Number *</label>
+                                <input type="tel" id="edit-phone" required class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Branch *</label>
+                                <select id="edit-branch" required class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                                    <option value="" disabled>Select Branch</option>
+                                 <option value="Edathara">Edathara</option>
+                                    <option value="Thanimootil">Thanimootil</option>
+                                    <option value="Naduvilevidu">Naduvilevidu</option>
+                                    <option value="Moolayil">Moolayil</option>
+                                      <option value="Ovelil">Ovelil</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Current Address</label>
+                                <textarea id="edit-address" rows="2" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm resize-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Occupation</label>
+                                <input type="text" id="edit-occupation" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Generation</label>
+                                <select id="edit-generation" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                                    <option value="" disabled>Select Generation</option>
+                                    <option value="1st Generation">1st Generation</option><option value="2nd Generation">2nd Generation</option>
+                                    <option value="3rd Generation">3rd Generation</option><option value="4th Generation">4th Generation</option>
+                                    <option value="5th Generation">5th Generation</option><option value="6th Generation">6th Generation</option>
+                                    <option value="7th Generation">7th Generation</option> <option value="8th Generation">8th Generation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Blood Group</label>
+                                <select id="edit-blood-group" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                                    <option value="">Unknown</option>
+                                    <option value="A+">A+</option><option value="A-">A-</option>
+                                    <option value="B+">B+</option><option value="B-">B-</option>
+                                    <option value="O+">O+</option><option value="O-">O-</option>
+                                    <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Date of Birth</label>
+                                <input type="date" id="edit-dob" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm text-gray-700">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Marital Status</label>
+                                <select id="edit-marital-status" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                                    <option value="Single">Single</option><option value="Married">Married</option><option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Gender</label>
+                                <select id="edit-gender" class="w-full px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus:bg-white focus:ring-2 focus:ring-maroon/30 focus:border-maroon transition-all text-sm">
+                                    <option value="Male">Male</option><option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="edit-error" class="hidden bg-red-50 text-red-600 text-sm p-3 rounded-lg border border-red-100"></div>
+                    <div class="pt-4 border-t border-gray-100 flex justify-end gap-3">
+                        <button type="button" onclick="document.getElementById('edit-profile-modal').classList.add('hidden')" class="px-5 py-2 rounded-lg font-bold text-sm text-gray-600 hover:bg-gray-100 transition-colors">Cancel</button>
+                        <button type="submit" id="save-profile-btn" class="px-5 py-2 bg-maroon text-white rounded-lg font-bold text-sm hover:bg-red-800 transition-all shadow-md">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-6 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 Edathara Kudumbayogam.</p>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-maroon"></i> Secure Members Area
+            </div>
+        </div>
+    </footer>
+
+    <!-- Protected Route Logic -->
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { supabase } from './js/supabase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { doc, getDoc, updateDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        let currentUserId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const pageLoader = document.getElementById('page-loader');
+            const userEmailEl = document.getElementById('user-email');
+            const logoutBtn = document.getElementById('logout-btn');
+            const welcomeMessage = document.getElementById('welcome-message');
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUserId = user.uid;
+                    userEmailEl.innerText = user.email;
+                    
+                    // Fetch user profile from Firestore
+                    try {
+                        const docRef = doc(db, "members", user.uid);
+                        const docSnap = await getDoc(docRef);
+                        
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            
+                            // Update Welcome Message
+                            if (data.fullName) {
+                                welcomeMessage.innerHTML = `<img src="logo.png" alt="Logo" class="h-8 w-auto inline-block object-contain opacity-80"> Welcome, ${data.fullName.split(' ')[0]}`;
+                            }
+
+                            // Update Profile Summary Card
+                            document.getElementById('profile-summary-name').innerText = data.fullName || 'No Name Provided';
+                            document.getElementById('profile-summary-branch').innerText = data.branch || 'Unknown';
+                            document.getElementById('profile-summary-phone').innerText = data.phone || 'No phone number';
+                            
+                            if (data.photoUrl) {
+                                document.getElementById('profile-summary-photo').src = data.photoUrl;
+                                document.getElementById('profile-summary-photo').classList.remove('hidden');
+                                document.getElementById('profile-summary-initial').classList.add('hidden');
+                            }
+
+                            // Populate Edit Modal
+                            document.getElementById('edit-fullname').value = data.fullName || '';
+                            document.getElementById('edit-phone').value = data.phone || '';
+                            document.getElementById('edit-branch').value = data.branch || '';
+                            document.getElementById('edit-address').value = data.address || '';
+                            document.getElementById('edit-occupation').value = data.occupation || '';
+                            document.getElementById('edit-generation').value = data.generation || '';
+                            document.getElementById('edit-blood-group').value = data.bloodGroup || '';
+                            document.getElementById('edit-dob').value = data.dob || '';
+                            document.getElementById('edit-marital-status').value = data.maritalStatus || 'Single';
+                            document.getElementById('edit-gender').value = data.gender || 'Male';
+                            
+                            if (data.photoUrl) {
+                                document.getElementById('edit-photo-preview').src = data.photoUrl;
+                            }
+                        } else {
+                            console.log("No profile document found for user.");
+                        }
+                    } catch (error) {
+                        console.error("Error fetching user profile:", error);
+                    }
+
+                    // Show the page
+                    pageLoader.style.opacity = '0';
+                    setTimeout(() => {
+                        pageLoader.style.display = 'none';
+                        
+                        // Trigger fade in animation
+                        const observer = new IntersectionObserver((entries, obs) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('visible');
+                                    obs.unobserve(entry.target);
+                                }
+                            });
+                        }, { threshold: 0.1 });
+                        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+                        
+                    }, 300);
+                } else {
+                    // User is signed out, redirect to login
+                    window.location.replace('login.html');
+                }
+            });
+
+            // Handle Profile Update
+            document.getElementById('edit-profile-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('save-profile-btn');
+                const errorDiv = document.getElementById('edit-error');
+                
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+                errorDiv.classList.add('hidden');
+
+                try {
+                    let photoUrl = document.getElementById('edit-photo-preview').src;
+                    const fileInput = document.getElementById('edit-photo');
+                    
+                    if (fileInput.files.length > 0) {
+                        const file = fileInput.files[0];
+                        const fileName = 'members/' + currentUserId + '_' + Date.now() + '_' + file.name;
+                        
+                        const { data, error } = await supabase.storage
+                            .from('members')
+                            .upload(fileName, file, { upsert: false });
+
+                        if (error) throw new Error('Upload failed: ' + error.message);
+                        
+                        const { data: publicData } = supabase.storage
+                            .from('members')
+                            .getPublicUrl(fileName);
+                        
+                        photoUrl = publicData.publicUrl;
+                    }
+
+                    const updateData = {
+                        fullName: document.getElementById('edit-fullname').value.trim(),
+                        phone: document.getElementById('edit-phone').value.trim(),
+                        branch: document.getElementById('edit-branch').value,
+                        address: document.getElementById('edit-address').value.trim(),
+                        occupation: document.getElementById('edit-occupation').value.trim(),
+                        generation: document.getElementById('edit-generation').value,
+                        bloodGroup: document.getElementById('edit-blood-group').value,
+                        dob: document.getElementById('edit-dob').value,
+                        maritalStatus: document.getElementById('edit-marital-status').value,
+                        gender: document.getElementById('edit-gender').value
+                    };
+
+                    // Only update photoUrl if it's a valid remote URL or we successfully uploaded one
+                    if (photoUrl && photoUrl.startsWith('http')) {
+                        updateData.photoUrl = photoUrl;
+                    }
+
+                    await updateDoc(doc(db, "members", currentUserId), updateData);
+                    
+                    // Update UI immediately without reload
+                    document.getElementById('profile-summary-name').innerText = updateData.fullName;
+                    document.getElementById('profile-summary-branch').innerText = updateData.branch;
+                    document.getElementById('profile-summary-phone').innerText = updateData.phone;
+                    document.getElementById('welcome-message').innerHTML = `<img src="logo.png" alt="Logo" class="h-8 w-auto inline-block object-contain opacity-80"> Welcome, ${updateData.fullName.split(' ')[0]}`;
+                    
+                    if (updateData.photoUrl) {
+                        document.getElementById('profile-summary-photo').src = updateData.photoUrl;
+                        document.getElementById('profile-summary-photo').classList.remove('hidden');
+                        document.getElementById('profile-summary-initial').classList.add('hidden');
+                    }
+
+                    document.getElementById('edit-profile-modal').classList.add('hidden');
+                    alert("Profile updated successfully!");
+
+                } catch (error) {
+                    console.error("Error updating profile:", error);
+                    errorDiv.innerText = "Error: " + error.message;
+                    errorDiv.classList.remove('hidden');
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = 'Save Changes';
+                }
+            });
+
+            // Logout handler
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    try {
+                        await signOut(auth);
+                        // Redirect handled automatically by onAuthStateChanged
+                    } catch (error) {
+                        console.error("Sign out error", error);
+                        alert("Error signing out. Please try again.");
+                    }
+                });
+            }
+            
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        });
+    </script>
+</body>
+</html>

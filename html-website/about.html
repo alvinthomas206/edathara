@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Edathara Kudumbayogam</title>
+    <meta name="description" content="Official website of Edathara Kudumbayogam - A Kerala-based family association preserving heritage and unity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { maroon: '#800000', gold: '#FFD700', darkgreen: '#006400', cream: '#FFFDD0', lightgold: '#FFE55C' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    boxShadow: { 'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #faf9f6; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.18); }
+        .glass-dark { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .masonry { column-count: 1; column-gap: 1rem; }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        main { flex-grow: 1; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-maroon selection:text-gold">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-xl md:text-2xl font-heading font-bold text-maroon tracking-wider flex items-center gap-2 drop-shadow-sm transition-colors" id="nav-brand">
+                        <img src="logo.png" alt="Logo" class="h-10 w-auto inline-block object-contain">
+                        EDATHARA <span class="hidden sm:inline">KUDUMBAYOGAM</span>
+                    </a>
+                </div>
+                <div class="hidden lg:flex space-x-1 items-center">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-maroon font-bold px-3 py-2 rounded-md text-sm transition-colors">About</a>
+                    <a href="family-tree.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Family Tree</a>
+                    <a href="events.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Events</a>
+                    <a href="gallery.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Gallery</a>
+                    <a href="announcements.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Announcements</a>
+                    <a href="donations.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Donations</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    <a id="auth-btn-desktop" href="login.html" class="bg-maroon text-white hover:bg-maroon/90 px-5 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-maroon/30 ml-2">Login</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-800 hover:text-maroon focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="index.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Home</a>
+                <a href="about.html" class="mobile-link block px-3 py-3 text-base font-medium text-maroon hover:bg-cream rounded-md">About</a>
+                <a href="family-tree.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Family Tree</a>
+                <a href="events.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Events</a>
+                <a href="gallery.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Gallery</a>
+                <a href="announcements.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Announcements</a>
+                <a href="donations.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Donations</a>
+                <a href="contact.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Contact</a>
+                <a id="auth-btn-mobile" href="login.html" class="mobile-link block px-3 py-3 text-base font-medium text-maroon hover:bg-cream rounded-md border-t border-gray-100 mt-2 pt-4">Login / Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <div class="pt-16 pb-10 bg-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+                <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900">About Us</h1>
+                <div class="w-24 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+        </div>
+
+        <section id="about" class="py-20 bg-cream relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gold rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-darkgreen rounded-full mix-blend-multiply filter blur-3xl opacity-10 translate-y-1/2 -translate-x-1/2"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative fade-in">
+                        <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl relative">
+                            <img src="Photos/fp2.jpg" alt="Traditional Kerala House" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <p class="font-heading text-xl font-medium italic">"A legacy woven with tradition, nurtured by unity."</p>
+                            </div>
+                        </div>
+                        <div class="absolute -z-10 -bottom-6 -right-6 w-full h-full rounded-2xl border-2 border-gold/50"></div>
+                    </div>
+                    <div class="space-y-6 fade-in" style="transition-delay: 200ms;">
+                        <h4 class="text-2xl font-heading font-semibold text-darkgreen">A Journey Through Generations</h4>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-4 text-justify">
+                            എ.ഡി. മൂന്നാം ശതകത്തിൽ തന്നെ കുറവിലങ്ങാട് ക്രിസ്ത്യാനികളുടെ കേന്ദ്രമായിരുന്നതായും വിശുദ്ധ മർത്തമറിയം പള്ളി സ്ഥാപിക്കപ്പെട്ടതായും ചരിത്രകാരന്മാർ രേഖപ്പെടുത്തിയിട്ടുണ്ട്. അക്കാലത്ത് കൊടുങ്ങല്ലൂരിൽനിന്നും ക്രിസ്ത്യാനികളായി മാറിയ നാലു നമ്പൂതിരി കുടുംബങ്ങൾ കുറവിലങ്ങാട് പള്ളിയുടെ നാലുവശങ്ങളിൽ താമസമുറപ്പിച്ചു എന്നും അവരുടെ സന്തതിപരമ്പരയിൽപ്പെട്ടവരാണ് കുറവിലങ്ങാട് നസ്രാണികൾ എന്നും വിശ്വസിക്കപ്പെടുന്നു.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-4 text-justify">
+                            നിഖ്യാസുന്നഹദോസ് തീരുമാന പ്രകാരം സെലൂക്യാ ആസ്ഥാനമാക്കി സ്ഥാപിച്ച കിഴക്കിന്റെ സിംഹാസനത്തിൽനിന്നും 16-ാം നൂറ്റാണ്ടുവരെ മലങ്കരയിലേക്ക് മെത്രാന്മാരെ അയച്ചിരുന്നതായും ചരിത്രകാരന്മാർ രേഖപ്പെടുത്തിയിട്ടുണ്ട്.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-4 text-justify">
+                            ക്രിസ്തുവർഷം 1498-ൽ പോർച്ചുഗീസുകാരനായ വാസ്കോ ഡി ഗാമ കേരളത്തിൽ വരികയും ഇവിടുത്തെ സുറിയാനി ക്രിസ്ത്യാനികളെയും സുറിയാനി സഭയെയും പറ്റി മനസ്സിലാക്കി പോർച്ചുഗൽ സഭയ്ക്കും രാജാവിനും വിവരങ്ങൾ നൽകുകയും തുടർന്ന് പോർട്ടുഗീസുകാർ കേരളത്തിൽ എത്തി ഇവിടെ ഉണ്ടായിരുന്ന നാട്ടുരാജ്യങ്ങൾ പിടിച്ചടക്കി രാജ്യഭരണത്തിൽ ഏർപ്പെടുകയും ചെയ്തു. ആ കൂട്ടത്തിൽ പോർച്ചുഗീസ് മിഷനറിമാർ കേരളത്തിൽ പ്രവേശിക്കുകയും സുറിയാനി ക്രിസ്ത്യാനികളുടെ മേൽ ആധിപത്യം സ്ഥാപിക്കുന്നതിന് ശക്തമായ പ്രവർത്തനങ്ങൾ നടത്തുകയും ചെയ്തു.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed text-lg mb-4 text-justify">
+                            1599-ൽ നടന്ന ഉദയംപേരൂർ സുന്നഹദോസോടെ സുറിയാനി സഭയുടെമേൽ കത്തോലിക്കാ ആധിപത്യം അടിച്ചേൽപ്പിക്കപ്പെട്ടു. സുറിയാനി ക്രിസ്ത്യാനികളുടെ ആചാരങ്ങൾക്കു വിരുദ്ധമായ പല നിശ്ചയങ്ങളും പ്രസ്തുത സുന്നഹദോസിൽ കൈക്കൊണ്ടു. അതിൽ പ്രധാനമായത് പള്ളികളിൽ രൂപങ്ങൾവെച്ച് ആരാധന നടത്തണമെന്നതായിരുന്നു. വിഗ്രഹാരാധനയിൽ വിശ്വസിക്കാതിരുന്ന സുറിയാനിക്കാർ പ്രസ്തുത തീരുമാനങ്ങളെ എതിർത്തു. തുടർന്ന് മലങ്കര സുറിയാനിസഭയിലെ പല പള്ളികളിലും അന്തഃഛിദ്രങ്ങളും കലഹങ്ങളുമുണ്ടാവുകയും കുറേ പള്ളികൾ പൂർണ്ണമായും റോമൻ കത്തോലിക്കാ നിയന്ത്രണത്തിൽ വരികയും ബാക്കിയുള്ളവ സുറിയാനി പാരമ്പര്യത്തിൽ തുടരുകയും ചെയ്തു.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                            <div class="glass-card p-6 rounded-xl border-l-4 border-maroon">
+                                <h5 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-bullseye text-maroon"></i> Our Mission
+                                </h5>
+                                <p class="text-sm text-gray-600">To foster unity, provide support during times of need, and celebrate our shared achievements as one family.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl border-l-4 border-gold">
+                                <h5 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-eye text-gold"></i> Our Vision
+                                </h5>
+                                <p class="text-sm text-gray-600">A connected, prosperous, and culturally grounded Edathara family that leaves a positive mark on the world.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-maroon mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <a href="index.html" class="text-2xl font-heading font-bold text-white tracking-wider flex items-center gap-2">
+                        <img src="logo.png" alt="Logo" class="h-10 w-auto inline-block object-contain">
+                        EDATHARA
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Preserving the rich heritage and traditions of our ancestors while fostering unity among the present and future generations.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-maroon hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-maroon hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-maroon hover:text-white transition-all"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-heading font-bold mb-6 text-gold relative inline-block">Quick Links<span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-maroon -mb-2"></span></h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> About Us</a></li>
+                        <li><a href="family-tree.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Family Tree</a></li>
+                        <li><a href="events.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Events</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Photo Gallery</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-heading font-bold mb-6 text-gold relative inline-block">Support<span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-maroon -mb-2"></span></h4>
+                    <ul class="space-y-3">
+                        <li><a href="announcements.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Announcements</a></li>
+                        <li><a href="donations.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Make a Donation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-maroon"></i> Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-heading font-bold mb-6 text-gold relative inline-block">Family Motto<span class="absolute bottom-0 left-0 w-1/2 h-0.5 bg-maroon -mb-2"></span></h4>
+                    <blockquote class="italic text-gray-400 border-l-4 border-maroon pl-4 py-1 mb-6">"United we stand, preserving our past, building our future."</blockquote>
+                    <p class="text-sm text-gray-400 mb-3">Subscribe to directory updates:</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email address" class="bg-white/5 border border-white/10 px-4 py-2 rounded-l-lg w-full focus:outline-none focus:border-maroon text-sm text-white">
+                        <button class="bg-maroon hover:bg-red-800 px-4 py-2 rounded-r-lg transition-colors text-sm font-medium">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 Edathara Kudumbayogam. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Designed with <i class="fa-solid fa-heart text-maroon mx-1"></i> for the Family</p>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/auth-state.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

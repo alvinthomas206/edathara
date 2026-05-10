@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Edathara Kudumbayogam</title>
+    <meta name="description" content="Login to access the members area of Edathara Kudumbayogam.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { maroon: '#800000', gold: '#FFD700', darkgreen: '#006400', cream: '#FFFDD0', lightgold: '#FFE55C' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'], heading: ['Outfit', 'sans-serif'] },
+                    boxShadow: { 'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #faf9f6; display: flex; flex-direction: column; min-height: 100vh; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.18); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        main { flex-grow: 1; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #800000; border-radius: 4px; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-maroon selection:text-gold">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white shadow-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-xl md:text-2xl font-heading font-bold text-maroon tracking-wider flex items-center gap-2 drop-shadow-sm transition-colors" id="nav-brand">
+                        <img src="logo.png" alt="Logo" class="h-10 w-auto inline-block object-contain">
+                        EDATHARA <span class="hidden sm:inline">KUDUMBAYOGAM</span>
+                    </a>
+                </div>
+                <div class="hidden lg:flex space-x-1 items-center">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                    <a href="family-tree.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Family Tree</a>
+                    <a href="events.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Events</a>
+                    <a href="gallery.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Gallery</a>
+                    <a href="announcements.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Announcements</a>
+                    <a href="donations.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Donations</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-maroon px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    <a id="auth-btn-desktop" href="login.html" class="bg-maroon text-white hover:bg-maroon/90 px-5 py-2 rounded-full text-sm font-medium transition-all shadow-lg shadow-maroon/30 ml-2">Login</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-800 hover:text-maroon focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="index.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Home</a>
+                <a href="about.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">About</a>
+                <a href="family-tree.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Family Tree</a>
+                <a href="events.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Events</a>
+                <a href="gallery.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Gallery</a>
+                <a href="announcements.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Announcements</a>
+                <a href="donations.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Donations</a>
+                <a href="contact.html" class="mobile-link block px-3 py-3 text-base font-medium text-gray-800 hover:text-maroon hover:bg-cream rounded-md">Contact</a>
+                <a id="auth-btn-mobile" href="login.html" class="mobile-link block px-3 py-3 text-base font-medium text-maroon hover:bg-cream rounded-md border-t border-gray-100 mt-2 pt-4">Login / Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex items-center justify-center pt-20 pb-12 bg-cream relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gold rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-maroon rounded-full mix-blend-multiply filter blur-3xl opacity-10 translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="relative z-10 w-full max-w-md px-4 fade-in">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-md text-3xl mb-4 text-maroon border border-gray-100">
+                    <img src="logo.png" alt="Logo" class="h-10 w-auto inline-block object-contain drop-shadow-sm">
+                </div>
+                <h1 class="text-3xl font-heading font-bold text-gray-900">Edathara Family</h1>
+                <p class="text-gray-600 mt-2" id="auth-subtitle">Sign in to access the exclusive members area</p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 relative overflow-hidden shadow-2xl border-white/50">
+                <!-- Tabs -->
+                <div class="flex mb-8 bg-gray-100 p-1 rounded-lg">
+                    <button id="tab-login" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-maroon shadow-sm transition-all duration-200">Login</button>
+                    <button id="tab-signup" class="flex-1 py-2 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 transition-all duration-200">Sign Up</button>
+                </div>
+
+                <!-- Error Message Container -->
+                <div id="auth-error" class="hidden mb-4 p-3 rounded-lg bg-red-50 text-red-600 text-sm border border-red-100 items-start gap-2">
+                    <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+                    <span id="auth-error-text">An error occurred.</span>
+                </div>
+
+                <!-- Form -->
+                <form id="auth-form" class="space-y-5">
+                    
+                    <!-- Signup specific fields (hidden by default) -->
+                    <div id="signup-fields" class="hidden space-y-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                        <!-- Photo Upload -->
+                        <div class="flex flex-col items-center gap-3 mb-4 mt-2">
+                            <div class="w-24 h-24 rounded-full border-2 border-dashed border-gray-300 bg-gray-50 flex items-center justify-center relative overflow-hidden group cursor-pointer" id="signup-photo-preview-container">
+                                <img id="signup-photo-preview" src="" class="w-full h-full object-cover hidden">
+                                <div class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center transition-all">
+                                    <i class="fa-solid fa-camera text-white text-xl"></i>
+                                </div>
+                                <i class="fa-solid fa-user text-gray-400 text-3xl" id="signup-photo-icon"></i>
+                            </div>
+                            <label class="text-xs font-bold text-maroon uppercase tracking-wider cursor-pointer hover:underline">
+                                Upload Photo
+                                <input type="file" id="signup-photo" class="hidden" accept="image/*" onchange="window.previewSignupImage(this)">
+                            </label>
+                        </div>
+                        
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="fullname" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none">
+                        </div>
+                        <!-- Phone -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="phone" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none">
+                        </div>
+                        <!-- Address -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Address / Location</label>
+                            <input type="text" id="address" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none">
+                        </div>
+                        <!-- Occupation -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Occupation</label>
+                            <input type="text" id="occupation" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none">
+                        </div>
+                        
+                        <!-- Grid for smaller fields -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Branch *</label>
+                                <select id="branch" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                                    <option value="">Select Branch</option>
+                                    <option value="Edathara">Edathara</option>
+                                    <option value="Thanimootil">Thanimootil</option>
+                                    <option value="Naduvilevidu">Naduvilevidu</option>
+                                    <option value="Moolayil">Moolayil</option>
+                                      <option value="Ovelil">Ovelil</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Generation</label>
+                                <select id="generation" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                                    <option value="">Select</option>
+                                    <option value="1st Generation">1st Generation</option><option value="2nd Generation">2nd Generation</option>
+                                    <option value="3rd Generation">3rd Generation</option><option value="4th Generation">4th Generation</option>
+                                        <option value="5th Generation">5th Generation</option><option value="6th Generation">6th Generation</option>
+                                        <option value="7th Generation">7th Generation</option> <option value="8th Generation">8th Generation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Blood Group</label>
+                                <select id="blood-group" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                                    <option value="">Select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                <select id="gender" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                                    <option value="">Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                                <input type="date" id="dob" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
+                                <select id="marital-status" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none bg-white">
+                                    <option value="">Select</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Divorced">Divorced</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">About</label>
+                                <textarea id="about" rows="2" class="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm outline-none resize-none" placeholder="Short biography..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <input type="email" id="email" required class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm transition-colors outline-none bg-white/80" placeholder="you@example.com">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <input type="password" id="password" required minlength="6" class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-maroon focus:border-maroon sm:text-sm transition-colors outline-none bg-white/80" placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <div id="forgot-password-container" class="flex items-center justify-end">
+                        <a href="#" class="text-xs font-medium text-maroon hover:text-red-800">Forgot your password?</a>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-maroon hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-maroon transition-colors shadow-lg shadow-maroon/20">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+            
+            <div class="text-center mt-6">
+                <a href="index.html" class="text-sm text-gray-500 hover:text-maroon transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-6 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
+            <p>&copy; 2026 Edathara Kudumbayogam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shared Firebase config and Auth State listener -->
+    <script type="module" src="js/auth-state.js"></script>
+    
+    <!-- Auth Page Specific Logic -->
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { supabase } from './js/supabase-config.js';
+
+        window.previewSignupImage = function(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('signup-photo-preview');
+                    const icon = document.getElementById('signup-photo-icon');
+                    img.src = e.target.result;
+                    img.classList.remove('hidden');
+                    if(icon) icon.classList.add('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // UI Elements
+            const form = document.getElementById('auth-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const submitBtn = document.getElementById('submit-btn');
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+            const forgotPasswordContainer = document.getElementById('forgot-password-container');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            const errorContainer = document.getElementById('auth-error');
+            const errorText = document.getElementById('auth-error-text');
+            const signupFields = document.getElementById('signup-fields');
+            const fullnameInput = document.getElementById('fullname');
+            const phoneInput = document.getElementById('phone');
+            const branchInput = document.getElementById('branch');
+
+            let isLoginMode = true;
+            let isSubmittingSignup = false;
+
+            // Check if already logged in -> redirect to members
+            onAuthStateChanged(auth, (user) => {
+                if (user && !isSubmittingSignup) {
+                    window.location.href = 'members.html';
+                }
+            });
+
+            // Toggle Tabs
+            tabLogin.addEventListener('click', () => {
+                isLoginMode = true;
+                tabLogin.className = 'flex-1 py-2 text-sm font-bold rounded-md bg-white text-maroon shadow-sm transition-all duration-200';
+                tabSignup.className = 'flex-1 py-2 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 transition-all duration-200';
+                submitBtn.innerText = 'Sign In';
+                forgotPasswordContainer.style.display = 'flex';
+                authSubtitle.innerText = 'Sign in to access the exclusive members area';
+                errorContainer.classList.add('hidden');
+                signupFields.classList.add('hidden');
+                
+                // Remove required flags
+                fullnameInput.removeAttribute('required');
+                phoneInput.removeAttribute('required');
+                branchInput.removeAttribute('required');
+            });
+
+            tabSignup.addEventListener('click', () => {
+                isLoginMode = false;
+                tabSignup.className = 'flex-1 py-2 text-sm font-bold rounded-md bg-white text-maroon shadow-sm transition-all duration-200';
+                tabLogin.className = 'flex-1 py-2 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700 transition-all duration-200';
+                submitBtn.innerText = 'Create Account';
+                forgotPasswordContainer.style.display = 'none';
+                authSubtitle.innerText = 'Join the official family portal';
+                errorContainer.classList.add('hidden');
+                signupFields.classList.remove('hidden');
+                
+                // Add required flags
+                fullnameInput.setAttribute('required', 'true');
+                phoneInput.setAttribute('required', 'true');
+                branchInput.setAttribute('required', 'true');
+            });
+
+            // Handle Form Submission
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                errorContainer.classList.add('hidden');
+                submitBtn.disabled = true;
+                const originalText = submitBtn.innerText;
+                submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+                
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+
+                try {
+                    if (isLoginMode) {
+                        await signInWithEmailAndPassword(auth, email, password);
+                    } else {
+                        isSubmittingSignup = true;
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                        const user = userCredential.user;
+                        
+                        // Handle Photo Upload
+                        let photoUrl = '';
+                        const fileInput = document.getElementById('signup-photo');
+                        if (fileInput && fileInput.files.length > 0) {
+                            const file = fileInput.files[0];
+                            const fileName = 'members/' + Date.now() + '_' + file.name;
+                            
+                            const { data, error } = await supabase.storage
+                                .from('members')
+                                .upload(fileName, file, { upsert: false });
+
+                            if (!error) {
+                                const { data: publicData } = supabase.storage
+                                    .from('members')
+                                    .getPublicUrl(fileName);
+                                photoUrl = publicData.publicUrl;
+                            }
+                        }
+
+                        // Save personal information to Firestore members collection
+                        await setDoc(doc(db, "members", user.uid), {
+                            fullName: document.getElementById('fullname').value.trim(),
+                            phone: document.getElementById('phone').value.trim(),
+                            address: document.getElementById('address').value.trim() || '',
+                            occupation: document.getElementById('occupation').value.trim() || '',
+                            branch: document.getElementById('branch').value || '',
+                            generation: document.getElementById('generation').value || '',
+                            bloodGroup: document.getElementById('blood-group').value || '',
+                            dob: document.getElementById('dob').value || '',
+                            maritalStatus: document.getElementById('marital-status').value || '',
+                            gender: document.getElementById('gender') ? document.getElementById('gender').value : '',
+                            about: document.getElementById('about') ? document.getElementById('about').value.trim() : '',
+                            photoUrl: photoUrl,
+                            email: email,
+                            uid: user.uid,
+                            createdAt: new Date().toISOString()
+                        });
+                        console.log('User profile created successfully in Firestore:', user.uid);
+                        
+                        // Now safely redirect
+                        window.location.href = 'members.html';
+                    }
+                } catch (error) {
+                    isSubmittingSignup = false;
+                    console.error("Auth Error Details:", error);
+                    errorContainer.classList.remove('hidden');
+                    errorContainer.style.display = 'flex';
+                    
+                    // Format Firebase error messages gracefully
+                    switch (error.code) {
+                        case 'auth/invalid-email':
+                            errorText.innerText = 'The email address is not valid.';
+                            break;
+                        case 'auth/user-disabled':
+                            errorText.innerText = 'This account has been disabled.';
+                            break;
+                        case 'auth/user-not-found':
+                            errorText.innerText = 'No account found with this email.';
+                            break;
+                        case 'auth/wrong-password':
+                        case 'auth/invalid-credential':
+                            errorText.innerText = 'Incorrect email or password.';
+                            break;
+                        case 'auth/email-already-in-use':
+                            errorText.innerText = 'An account already exists with this email.';
+                            break;
+                        case 'auth/weak-password':
+                            errorText.innerText = 'The password must be at least 6 characters.';
+                            break;
+                        default:
+                            errorText.innerText = 'Authentication failed. Please try again later.';
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalText;
+                }
+            });
+
+            // Fade in animation
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if(btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        });
+    </script>
+</body>
+</html>
